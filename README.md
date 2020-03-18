@@ -9,3 +9,5 @@
   <li>run "npm init"</li>
   <li>run "npm start"</li>
 </ol>
+
+<marquee>Have Fun</marquee>
