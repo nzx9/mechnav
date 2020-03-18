@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MECHNAV|REGISTER</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+  </head>
+  <body class="body">
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title class="ion-text-center">REGISTER</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content style="position: relative;top:10%">
+        <ion-grid>
+          <ion-row>
+            <ion-col
+              size="12"
+              size-lg="6"
+              offset-lg="3"
+              size-xl="4"
+              offset-xl="4"
+            >
+              <form onsubmit="processRegister(event)" method="POST">
+                <ion-list lines="full" class="ion-no-margin ion-no-padding">
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Username<ion-text color="danger"> *</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="text"
+                      oninput="handleUserNameValue(event)"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Email<ion-text color="danger"> *</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="email"
+                      oninput="handleEmailValue(event)"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Password<ion-text color="danger"> *</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="password"
+                      oninput="handlePasswordValue(event)"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Retype Password
+                      <ion-text color="danger"> *</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="password"
+                      oninput="handleRetypePasswordValue(event)"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Contact Number
+                      <ion-text color="danger"> *</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="number"
+                      oninput="handleContactNumberValue(event)"
+                    ></ion-input>
+                  </ion-item>
+                </ion-list>
+                <div class="ion-padding">
+                  <ion-button
+                    color="tertiary"
+                    expand="block"
+                    type="submit"
+                    class="ion-no-margin"
+                    >Create account</ion-button
+                  >
+                </div>
+              </form>
+              <div style="text-align: center;">
+                Already have an account?<br />
+                <a href="/login">Login</a>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+      <ion-alert-controller></ion-alert-controller>
+      <ion-loading-controller></ion-loading-controller>
+    </ion-app>
+  </body>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.esm.js"
+    integrity="sha256-JSIS/FkxEKF8q7MA2MhfwxgosBnjrTThGa4PLYO5wWY="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    nomodule="true"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.js"
+    integrity="sha256-6gNIKpBgsNByMNVPlUPwqto988KKSVe3Vi8fDFUInHk="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    const alertController = document.querySelector("ion-alert-controller");
+    const loadingController = document.querySelector("ion-loading-controller");
+    let username, email, password, rpassword, cnumber;
+    function handleUserNameValue(event) {
+      username = event.target.value;
+    }
+    function handleEmailValue(event) {
+      email = event.target.value;
+    }
+    function handlePasswordValue(event) {
+      password = event.target.value;
+    }
+    function handleRetypePasswordValue(event) {
+      rpassword = event.target.value;
+    }
+    function handleContactNumberValue(event) {
+      cnumber = event.target.value;
+    }
+    function createAlert(header, message, callback = null) {
+      alertController
+        .create({
+          header: header,
+          message: message,
+          buttons: [
+            {
+              text: "OK",
+              handler: callback
+            }
+          ]
+        })
+        .then(alert => alert.present());
+    }
+
+    function processRegister(event) {
+      event.preventDefault();
+      if (password === rpassword) {
+        loadingController
+          .create({
+            message: "Please wait..."
+          })
+          .then(loading => loading.present());
+        fetch(window.location.origin + "/api/users/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+            contactNumber: cnumber,
+            dateCreated: Date().toString()
+          })
+        })
+          .then(result =>
+            result.json().then(res => {
+              if (res.success) {
+                loadingController.dismiss();
+                createAlert(
+                  "Welcome!",
+                  "Registed Successfully, Please login",
+                  () => {
+                    location.replace("/login");
+                  }
+                );
+              } else {
+                loadingController.dismiss();
+                createAlert("Error", res.msg);
+              }
+            })
+          )
+          .catch(err => {
+            loadingController.dismiss();
+            console.log(err);
+            createAlert("Error", err.message);
+          });
+      } else {
+        createAlert("Error", "Passwords not match");
+      }
+    }
+  </script>
+</html>

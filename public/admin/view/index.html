@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MECHNAV | VIEW</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button id="btn-mechanic-request" onclick="goBack()">
+              <ion-icon slot="icon-only" name="return-left"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title style="margin:0 auto">VIEW</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-grid style="padding: 0px;">
+          <ion-row>
+            <ion-col
+              size="12"
+              size-lg="6"
+              offset-lg="3"
+              size-xl="4"
+              offset-xl="4"
+            >
+              <ion-item>
+                <ion-label color="dark">Username : </ion-label>
+                <ion-input
+                  id="username"
+                  placholder="User Name"
+                  style="text-align: right;"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Email : </ion-label>
+                <ion-input
+                  id="email"
+                  placholder="email"
+                  style="text-align: right;"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>First Name : </ion-label>
+                <ion-input
+                  placeholder="Enter first name here"
+                  id="firstname"
+                  style="text-align: right;"
+                ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label>Last Name : </ion-label>
+                <ion-input
+                  placeholder="Enter last name here"
+                  id="lastname"
+                  style="text-align: right;"
+                ></ion-input>
+              </ion-item>
+              <ion-item-divider></ion-item-divider>
+              <ion-item>
+                <ion-label>Gender : </ion-label>
+                <select id="gender">
+                  <option value="none" id="none">Not Selected</option>
+                  <option value="male" id="male">Male</option>
+                  <option value="female" id="female">Female</option>
+                </select>
+              </ion-item>
+              <ion-item>
+                <ion-label>Contact No : </ion-label>
+                <ion-input
+                  id="contact-no"
+                  type="number"
+                  style="text-align: right;"
+                ></ion-input>
+              </ion-item>
+              <ion-item-divider></ion-item-divider>
+              <ion-item>
+                <ion-label>Joined Date : </ion-label>
+                <ion-datetime
+                  id="date-created"
+                  disabled
+                  value=""
+                  placeholder="Account Created Date"
+                ></ion-datetime>
+              </ion-item>
+              <ion-item>
+                <ion-label>Account Type : </ion-label>
+                <select id="acc-type">
+                  <option value="client" id="client">Client</option>
+                  <option value="mechanic" id="mechanic">Mechanic</option>
+                  <option value="admin" id="admin">Admin</option>
+                </select>
+              </ion-item>
+              <ion-item-divider></ion-item-divider>
+              <ion-buttons>
+                <ion-button
+                  fill="solid"
+                  onclick="updateUser()"
+                  color="primary"
+                  slot="end"
+                >
+                  Update
+                </ion-button>
+                <ion-button
+                  fill="solid"
+                  onclick="deleteUser()"
+                  color="danger"
+                  slot="end"
+                >
+                  Delete
+                </ion-button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+      <ion-alert-controller></ion-alert-controller>
+      <ion-loading-controller></ion-loading-controller>
+    </ion-app>
+  </body>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.esm.js"
+    integrity="sha256-JSIS/FkxEKF8q7MA2MhfwxgosBnjrTThGa4PLYO5wWY="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    nomodule="true"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.js"
+    integrity="sha256-6gNIKpBgsNByMNVPlUPwqto988KKSVe3Vi8fDFUInHk="
+    crossorigin="anonymous"
+  ></script>
+  <script src="./js/script.js"></script>
+  <script src="../../assets/script-com.js"></script>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>MECHNAV | LOGIN</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+  </head>
+  <body>
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title class="ion-text-center">LOGIN</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content style="position:relative;top:20%;">
+        <ion-grid>
+          <ion-row>
+            <ion-col
+              size="12"
+              size-lg="6"
+              offset-lg="3"
+              size-xl="4"
+              offset-xl="4"
+            >
+              <form onsubmit="processLogin(event)" method="POST">
+                <ion-list lines="full" class="ion-no-margin ion-no-padding">
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Email <ion-text color="danger">*</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="email"
+                      oninput="handleEmailValue(event)"
+                    ></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked" style="font-size: 20px;"
+                      >Password <ion-text color="danger">*</ion-text></ion-label
+                    >
+                    <ion-input
+                      required
+                      type="password"
+                      oninput="handlePasswordValue(event)"
+                    ></ion-input>
+                  </ion-item>
+                </ion-list>
+                <div class="ion-padding">
+                  <ion-button
+                    color="tertiary"
+                    expand="block"
+                    type="submit"
+                    class="ion-no-margin"
+                    >Login</ion-button
+                  >
+                </div>
+              </form>
+              <div style="text-align: center;">
+                Not have an account?<br />
+                <a href="/register">Register</a>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+      <ion-alert-controller></ion-alert-controller>
+      <ion-loading-controller></ion-loading-controller>
+    </ion-app>
+  </body>
+
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.esm.js"
+    integrity="sha256-JSIS/FkxEKF8q7MA2MhfwxgosBnjrTThGa4PLYO5wWY="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    nomodule="true"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.js"
+    integrity="sha256-6gNIKpBgsNByMNVPlUPwqto988KKSVe3Vi8fDFUInHk="
+    crossorigin="anonymous"
+  ></script>
+  <script src="../assets/cookie.js"></script>
+  <script>
+    const alertController = document.querySelector("ion-alert-controller");
+    const loadingController = document.querySelector("ion-loading-controller");
+    let email, password;
+    function handleEmailValue(event) {
+      email = event.target.value;
+    }
+    function handlePasswordValue(event) {
+      password = event.target.value;
+    }
+
+    function processLogin(event) {
+      event.preventDefault();
+      loadingController
+        .create({
+          message: "Please wait..."
+        })
+        .then(loading => loading.present());
+
+      fetch(window.location.origin + "/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+        .then(result =>
+          result.json().then(res => {
+            if (res.success) {
+              const cookie_userId = new Cookie("userId");
+              cookie_userId.set(res.data.uID, 1);
+              loadingController.dismiss();
+              location.replace("/");
+            } else {
+              loadingController.dismiss();
+              createAlert("Error", res.msg);
+            }
+          })
+        )
+        .catch(err => {
+          loadingController.dismiss();
+          createAlert("Error", err);
+        });
+    }
+
+    function createAlert(header, message) {
+      alertController
+        .create({
+          header: header,
+          message: message,
+          buttons: [
+            {
+              text: "OK"
+            }
+          ]
+        })
+        .then(alert => alert.present());
+    }
+  </script>
+</html>

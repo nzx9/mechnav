@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MECHNAV | ADMIN</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button id="btn-mechanic-request" onclick="goBack()">
+              <ion-icon slot="icon-only" name="return-left"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title style="margin:0 auto">ADMIN PANEL</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-grid style="padding: 0px;">
+          <ion-row>
+            <ion-col
+              size="12"
+              size-lg="6"
+              offset-lg="3"
+              size-xl="4"
+              offset-xl="4"
+              ><ion-toolbar>
+                <ion-searchbar> </ion-searchbar>
+              </ion-toolbar>
+              <ion-list id="user-data"> </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+      <ion-alert-controller></ion-alert-controller>
+      <ion-loading-controller></ion-loading-controller>
+    </ion-app>
+  </body>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.esm.js"
+    integrity="sha256-JSIS/FkxEKF8q7MA2MhfwxgosBnjrTThGa4PLYO5wWY="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    nomodule="true"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.js"
+    integrity="sha256-6gNIKpBgsNByMNVPlUPwqto988KKSVe3Vi8fDFUInHk="
+    crossorigin="anonymous"
+  ></script>
+  <script src="../assets/script-com.js"></script>
+  <script src="./js/script.js" defer></script>
+</html>

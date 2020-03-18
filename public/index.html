@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MECHNAV|HOME</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      integrity="sha256-bQmrZe4yPnQrLTY+1gYylfNMBuGfnT/HKsCGX+9Xuqo="
+      crossorigin="anonymous"
+    ></script>
+  	<script src="https://maps.googleapis.com/maps/api/js?key=<your_api_key_here>"></script> <!-- replace your api key with <your_api_key_here> -->
+  </head>
+
+  <body>
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>MECHNAV</ion-title>
+          <ion-buttons slot="secondary">
+            <!-- <ion-button id="btn-notifications" title="Notifications">
+              <ion-icon
+                name="notifications"
+                id="icon-notifications"
+                slot="icon-only"
+              ></ion-icon>
+            </ion-button> -->
+            <!-- not completed.-->
+          </ion-buttons>
+          <ion-buttons slot="primary">
+            <ion-chip
+              title="Profile"
+              id="null"
+              class="btn_profile"
+              onclick="navigate('profile')"
+            >
+              <ion-avatar>
+                <img id="img-avatar" src="#" />
+              </ion-avatar>
+              <ion-label
+                style="font-weight: 700;"
+                id="chip-username"
+              ></ion-label>
+            </ion-chip>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-grid style="padding: 0px;">
+          <div id="map"></div>
+        </ion-grid>
+      </ion-content>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-chip id="btn-mechanic-request" style="display:none">
+              <ion-icon name="construct"></ion-icon>
+              <label>Mechanics</label>
+            </ion-chip>
+          </ion-buttons>
+          <ion-buttons slot="secondary">
+            <ion-button
+              id="btn-locate-me"
+              title="Center current position"
+              onclick="locateMe(false)"
+            >
+              <ion-icon slot="icon-only" name="locate"></ion-icon>
+            </ion-button>
+            <ion-button
+              id="btn-locate-me-follow"
+              title="Position lock"
+              onclick="btn_locate_me_follow()"
+            >
+              <ion-icon
+                slot="icon-only"
+                name="man"
+                id="btn-locate-me-follow-icon"
+                color="dark"
+              ></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="primary">
+            <ion-button id="btn-options" title="Options" style="display:none">
+              <ion-icon slot="icon-only" name="more"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+      <ion-alert-controller></ion-alert-controller>
+      <ion-popover-controller></ion-popover-controller>
+      <ion-loading-controller></ion-loading-controller>
+      <ion-toast-controller></ion-toast-controller>
+    </ion-app>
+  </body>
+  <script type="text/javascript" src="./assets/cookie.js"></script>
+  <script type="text/javascript" src="./assets/script-com.js"></script>
+  <script type="text/javascript" src="./assets/map_style.js"></script>
+  <script
+    type="text/javascript"
+    src="./assets/userlocation.js"
+    async="true"
+  ></script>
+  <script
+    type="text/javascript"
+    src="./js/script.js"
+    async="true"
+    defer
+  ></script>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.esm.js"
+    integrity="sha256-JSIS/FkxEKF8q7MA2MhfwxgosBnjrTThGa4PLYO5wWY="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    nomodule="true"
+    src="https://cdn.jsdelivr.net/npm/@ionic/core@4.11.5/dist/ionic/ionic.js"
+    integrity="sha256-6gNIKpBgsNByMNVPlUPwqto988KKSVe3Vi8fDFUInHk="
+    crossorigin="anonymous"
+  ></script>
+</html>

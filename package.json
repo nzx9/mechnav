@@ -1,0 +1,20 @@
+{
+  "name": "mechnav",
+  "version": "1.0.2",
+  "description": "On road vehical breakdown assistent finder",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Navindu Dananga",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.7.0",
+    "helmet": "^3.21.2",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/google__maps": "^0.5.8"
+  }
+}
