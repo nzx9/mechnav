@@ -6,3 +6,5 @@
 🔴 Google firebase configure json and keys are required. (add configure json path to the/api/datastore.js) according to your config file name. 
 
 🔵 Working demo can be found at https://mechnav.azurewebsites.net. 
+
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
