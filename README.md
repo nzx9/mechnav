@@ -8,3 +8,4 @@
 🔵 Working demo can be found at https://mechnav.azurewebsites.net. 
 
 ![alt text](https://github.com/Dananga/MNAV/blob/master/IMG_20200526_190218.jpg?raw=true)
+![alt text](https://github.com/Dananga/MNAV/blob/master/IMG_20200526_190226.jpg?raw=true) 
