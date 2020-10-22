@@ -1,0 +1,13 @@
+
+let app = require('../app');
+let socket = require('socket.io');
+
+
+
+server = app.listen(process.env.PORT || 80, () => {
+    console.log("Listen on: " + 80);
+});
+let io = socket(server);
+io.on('connection', (socket) => {
+    console.log("Socket server id: "+ socket.id);
+});
